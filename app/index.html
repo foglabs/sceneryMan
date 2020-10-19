@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>SceneryMan</title>
-  <style type="text/css" src="sceneryMan.css"></style>
+   <link rel="stylesheet" href="SceneryMan.css">
 </head>
 <body>
   <script type="text/javascript">
@@ -23,6 +23,7 @@
     import { OrbitControls } from './OrbitControls.js'
     import { Shape } from './Shape.js'
     import { Cube } from './Cube.js'
+    import { Sphere } from './Sphere.js'
 
     var shapes = {}
     var currentShapeId = null
@@ -34,6 +35,8 @@
     
     var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 10000 );
     camera.position.set( 0, 0, 0 );
+    
+    // orbits
     var controls = new OrbitControls( camera, renderer.domElement );
     controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     controls.dampingFactor = 0.05;
@@ -42,20 +45,23 @@
     controls.maxDistance = 500;
     controls.maxPolarAngle = Math.PI / 2;
 
-
     var scene = new THREE.Scene()
-    scene.background = new THREE.Color( '#444488' )
+    scene.background = new THREE.Color( '#333333' )
     
-    var geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-    var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    let cube = new THREE.Mesh( geometry, material );
-    cube.position.set(0,0.8,3)
-    scene.add( cube );
-
-    var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 )
+    // onelight
+    var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.4 )
+    directionalLight.position.set(0.5,1,0.5)
     scene.add( directionalLight )
 
+    var light = new THREE.HemisphereLight( 0xffffff, 0x000000, 1 );
+    scene.add( light );
 
+    // var directionalLight2 = new THREE.DirectionalLight( 0xffffff, .5 )
+    // scene.add( directionalLight2 )
+
+
+
+    /////// WORKFLOW STUFF
     function randomSign(){
       return Math.random() > 0.5 ? 1 : -1
     }
@@ -75,24 +81,64 @@
       // shapes[shape.id].mesh.position.set(randomSign() * Math.random()*3, randomSign() * Math.random()*6, randomSign() * Math.random()*3)
 
       currentShapeId = shape.id
-
       scene.add(shapes[shape.id].mesh)
-
     }
 
+    function newSphere(){
+      let shape = new Sphere(0.1)
+      shapes[shape.id] = shape
+      currentShapeId = shape.id
+
+      scene.add(shapes[shape.id].mesh)
+    }
+
+    function printShapes(){
+      let shapeIds = Object.keys(shapes)
+      let outputStr = "var group = new THREE.Group()\n\n"
+      let shapeId
+      for(var i=0; i<shapeIds.length; i++){
+        shapeId = shapeIds[i]
+        console.log( 'geo', shapes[shapeId].mesh.geometry )
+        outputStr += shapes[shapeId].print()
+      }
+
+      outputStr += "scene.add(group)\n"
+
+      return outputStr
+    }
+
+    /////// DUH
     function animate() {
       // addRandomCube()
       controls.update()
+      
+      drawShapesList()
+
       requestAnimationFrame( animate )
       // draw de cool scene
       renderer.render( scene, camera )
     }
 
+    /////// UI
+    function drawShapesList() {
+      let str = ""
+      let shapeIds = Object.keys(shapes)
+      let shapeId
+      for(var i=0; i<shapeIds.length; i++){
+        shapeId = shapeIds[i]
+        str += "<h2 style='color: " + shapes[shapeId].color + ";'>" + shapes[shapeId].name + "</h2>"
+      }
+
+      // console.log( 'shape list', str )
+      document.getElementById("shape-list").innerHTML = str
+    }
+
     function onDocumentKeyDown(event){
       if(event.key == 'z'){
         newCube()
+      } else if(event.key == 'x'){
+        newSphere()
       }
-
 
       if(event.key == "ArrowLeft" || event.key == "ArrowUp" || event.key == "ArrowRight" || event.key == "ArrowDown"){
         shapes[currentShapeId].move(event.key)
@@ -127,7 +173,15 @@
       }
 
       if(event.key == "p"){
-        console.log( shapes[currentShapeId].print() )
+        // console.log( shapes[currentShapeId].print() )
+
+        console.log( 'output ', printShapes() )
+        document.getElementById("output").value = printShapes()
+      }
+
+      if(event.key == "Delete"){
+        shapes[currentShapeId].remove(scene)
+        delete shapes[currentShapeId]
       }
 
 
@@ -162,6 +216,8 @@
 
   </script>
 
+  <div id="shape-list"></div>
+  <textarea id="output" type="text" name="whatever"></textarea>
 
 
 </body>

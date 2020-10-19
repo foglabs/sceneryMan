@@ -1,3 +1,20 @@
 body{ 
   overflow: hidden;
 }
+
+div#shape-list {
+  padding: 1%;
+  background-color: black;
+  color: white;
+  opacity: 0.8;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+textarea#output {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

@@ -5,7 +5,11 @@ class Shape {
   constructor(geo){
     this.id = Math.random().toString(36).slice(2)
     this.color = rgbToHex(Math.floor( Math.random() * 255 ), Math.floor( Math.random() * 255 ), Math.floor( Math.random() * 255 ))
-    this.mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial( { color: this.color, transparent: true }))
+    this.mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial( { color: this.color, transparent: true }))
+
+    if(!this.name){
+      this.name = "Shape " + this.id
+    }
   }
 
   move(keyName){
@@ -52,6 +56,10 @@ class Shape {
     this.mesh.geometry.dispose()
     this.mesh.material.dispose()
     scene.remove(this.mesh)
+  }
+
+  name(){
+    return ""
   }
 
 }
