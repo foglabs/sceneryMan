@@ -18,3 +18,9 @@ textarea#output {
   bottom: 0;
   right: 0;
 }
+
+input#color {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

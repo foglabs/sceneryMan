@@ -115,6 +115,7 @@
       controls.update()
       
       drawShapesList()
+      drawColorPick()
 
       requestAnimationFrame( animate )
       // draw de cool scene
@@ -144,55 +145,82 @@
       document.getElementById("shape-list").innerHTML = str
     }
 
+    function drawColorPick(){
+
+      if(!document.getElementById("color").value && shapes[currentShapeId]){
+        document.getElementById("color").value = shapes[currentShapeId].color
+      }
+    }
+
     function onDocumentKeyDown(event){
       keyStates[event.key] = true
       // console.log( 'keys', event.key, true )
 
-      if(event.key == 'z'){
-        newCube()
-      } else if(event.key == 'x'){
-        newSphere()
-      }
+      if(document.getElementById("color") === document.activeElement){
+        // setting color
 
-      if(event.key == "ArrowLeft" || event.key == "ArrowUp" || event.key == "ArrowRight" || event.key == "ArrowDown"){
+        // only change... if its changin 
+        if(event.key == "Enter"){
+          let val = document.getElementById("color").value
 
-        let shift = keyStates["Shift"]  
-        shapes[currentShapeId].move(event.key, shift)
-      }
+          if(val != shapes[currentShapeId].color){
+            console.log( 'setting val', val )
+            shapes[currentShapeId].setColor(val)
 
-      if(event.key == "q"){
-        shapes[currentShapeId].rotateX(0.1)
-      } else if(event.key == "a"){
-        shapes[currentShapeId].rotateX(-0.1)
-      } else if(event.key == "w"){
-        shapes[currentShapeId].rotateY(0.1)
-      } else if(event.key == "s"){
-        shapes[currentShapeId].rotateY(-0.1)
-      } else if(event.key == "e"){
-        shapes[currentShapeId].rotateZ(0.1)
-      } else if(event.key == "d"){
-        shapes[currentShapeId].rotateZ(-0.1)
-      }
+            // unfocus if we changed the color
+            document.getElementById("color").blur()
+          }
+        }
+      } else {
+        
+        // main mode keys
+        if(event.key == 'z'){
+          newCube()
+        } else if(event.key == 'x'){
+          newSphere()
+        }
 
-      if(event.key == "r"){
-        shapes[currentShapeId].scaleX(0.1)
-      } else if(event.key == "f"){
-        shapes[currentShapeId].scaleX(-0.1)
-      } else if(event.key == "t"){
-        shapes[currentShapeId].scaleY(0.1)
-      } else if(event.key == "g"){
-        shapes[currentShapeId].scaleY(-0.1)
-      } else if(event.key == "y"){
-        shapes[currentShapeId].scaleZ(0.1)
-      } else if(event.key == "h"){
-        shapes[currentShapeId].scaleZ(-0.1)
-      }
+        if(event.key == "ArrowLeft" || event.key == "ArrowUp" || event.key == "ArrowRight" || event.key == "ArrowDown"){
 
-      if(event.key == "p"){
-        // console.log( shapes[currentShapeId].print() )
+          let shift = keyStates["Shift"]  
+          shapes[currentShapeId].move(event.key, shift)
+        }
 
-        console.log( 'output ', printShapes() )
-        document.getElementById("output").value = printShapes()
+        if(event.key == "q"){
+          shapes[currentShapeId].rotateX(0.1)
+        } else if(event.key == "a"){
+          shapes[currentShapeId].rotateX(-0.1)
+        } else if(event.key == "w"){
+          shapes[currentShapeId].rotateY(0.1)
+        } else if(event.key == "s"){
+          shapes[currentShapeId].rotateY(-0.1)
+        } else if(event.key == "e"){
+          shapes[currentShapeId].rotateZ(0.1)
+        } else if(event.key == "d"){
+          shapes[currentShapeId].rotateZ(-0.1)
+        }
+
+        if(event.key == "r"){
+          shapes[currentShapeId].scaleX(0.1)
+        } else if(event.key == "f"){
+          shapes[currentShapeId].scaleX(-0.1)
+        } else if(event.key == "t"){
+          shapes[currentShapeId].scaleY(0.1)
+        } else if(event.key == "g"){
+          shapes[currentShapeId].scaleY(-0.1)
+        } else if(event.key == "y"){
+          shapes[currentShapeId].scaleZ(0.1)
+        } else if(event.key == "h"){
+          shapes[currentShapeId].scaleZ(-0.1)
+        }
+
+        if(event.key == "p"){
+          // console.log( shapes[currentShapeId].print() )
+
+          console.log( 'output ', printShapes() )
+          document.getElementById("output").value = printShapes()
+        }
+
       }
 
       if(event.key == "Delete"){
@@ -240,6 +268,7 @@
 
   <div id="shape-list"></div>
   <textarea id="output" type="text" name="whatever"></textarea>
+  <input type="text" id="color" />
 
 
 </body>
