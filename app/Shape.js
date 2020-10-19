@@ -12,17 +12,26 @@ class Shape {
     }
   }
 
-  move(keyName){
+  move(keyName, shift=false){
+
     if(keyName == 'ArrowLeft'){
       this.mesh.position.set( this.mesh.position.x + 0.01, this.mesh.position.y, this.mesh.position.z )
     } else if(keyName == 'ArrowRight'){
       this.mesh.position.set( this.mesh.position.x - 0.01, this.mesh.position.y, this.mesh.position.z )
 
     } else if(keyName == 'ArrowUp'){
-      this.mesh.position.set( this.mesh.position.x, this.mesh.position.y + 0.01 , this.mesh.position.z )
+      if(shift){
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y + 0.01, this.mesh.position.z )  
+      } else {
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y, this.mesh.position.z + 0.01 )
+      }
 
     } else if(keyName == 'ArrowDown'){
-      this.mesh.position.set( this.mesh.position.x, this.mesh.position.y - 0.01, this.mesh.position.z )
+      if(shift){
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y - 0.01, this.mesh.position.z )  
+      } else {
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y, this.mesh.position.z - 0.01 )
+      }
     }
   }
 
@@ -37,8 +46,6 @@ class Shape {
   scaleZ(amt){
     this.mesh.scale.z += amt
   }
-
-
 
   rotateX(amt){
     this.mesh.rotation.x += amt
