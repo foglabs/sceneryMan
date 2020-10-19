@@ -33,7 +33,7 @@
     renderer.setSize( window.innerWidth, window.innerHeight )
     document.body.appendChild( renderer.domElement )
     
-    var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 10000 );
+    var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.001, 10000 );
     camera.position.set( 0, 0, 0 );
     
     // orbits
@@ -126,9 +126,18 @@
       let str = ""
       let shapeIds = Object.keys(shapes)
       let shapeId
+
+      let selected
       for(var i=0; i<shapeIds.length; i++){
         shapeId = shapeIds[i]
-        str += "<h2 style='color: " + shapes[shapeId].color + ";'>" + shapes[shapeId].name + "</h2>"
+
+        if(shapeId == currentShapeId){
+          selected = "*"
+        } else {
+          selected = ""
+        }
+
+        str += "<h2 style='color: " + shapes[shapeId].color + ";'>" + selected + shapes[shapeId].name + "</h2>"
       }
 
       // console.log( 'shape list', str )
