@@ -10,6 +10,18 @@ class Cube extends Shape {
     this.name = "Cube " + this.id
   }
 
+  duplicate(){
+    var dupe = new Cube(this.dimX, this.dimY, this.dimZ)
+    dupe.mesh.position.set(this.mesh.position.x,this.mesh.position.y,this.mesh.position.z)
+    dupe.mesh.scale.x = this.mesh.scale.x
+    dupe.mesh.scale.y = this.mesh.scale.y
+    dupe.mesh.scale.z = this.mesh.scale.z
+    dupe.mesh.rotation.x = this.mesh.rotation.x
+    dupe.mesh.rotation.y = this.mesh.rotation.y
+    dupe.mesh.rotation.z = this.mesh.rotation.z    
+    return dupe
+  }
+
   remove(scene){
     this.mesh.geometry.dispose()
     this.mesh.material.dispose()

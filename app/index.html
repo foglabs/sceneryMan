@@ -109,6 +109,13 @@
       return outputStr
     }
 
+    function copyCurrentShape(){
+      let duplicate = shapes[currentShapeId].duplicate()
+      shapes[duplicate.id] = duplicate
+      scene.add(shapes[duplicate.id].mesh)
+      currentShapeId = duplicate.id
+    }
+
     /////// DUH
     function animate() {
       // addRandomCube()
@@ -214,11 +221,15 @@
           shapes[currentShapeId].scaleZ(-0.1)
         }
 
+
+        // utilty functions
         if(event.key == "p"){
           // console.log( shapes[currentShapeId].print() )
 
           console.log( 'output ', printShapes() )
           document.getElementById("output").value = printShapes()
+        } else if(event.key == "o"){
+          copyCurrentShape()
         }
 
       }
