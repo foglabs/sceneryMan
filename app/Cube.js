@@ -18,7 +18,7 @@ class Cube extends Shape {
     dupe.mesh.scale.z = this.mesh.scale.z
     dupe.mesh.rotation.x = this.mesh.rotation.x
     dupe.mesh.rotation.y = this.mesh.rotation.y
-    dupe.mesh.rotation.z = this.mesh.rotation.z    
+    dupe.mesh.rotation.z = this.mesh.rotation.z
     return dupe
   }
 
@@ -31,6 +31,11 @@ class Cube extends Shape {
   print(){
     let str = "var shape" + this.id + " = new THREE.Mesh( new THREE.BoxGeometry( " + this.dimX*this.mesh.scale.x + "," + this.dimY*this.mesh.scale.y + "," + this.dimZ*this.mesh.scale.z +  " ), new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }))\nshape" + this.id + ".position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\nshape" + this.id + ".rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\ngroup.add ( shape" + this.id + " )\n\n"
 
+    return str
+  }
+
+  printCharacter(){
+    let str = "var char" + this.id + " = new Character( new THREE.Mesh( new THREE.BoxGeometry( " + this.dimX*this.mesh.scale.x + "," + this.dimY*this.mesh.scale.y + "," + this.dimZ*this.mesh.scale.z +  " ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [255,255,255], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\char" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
     return str
   }
 

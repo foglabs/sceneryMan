@@ -109,6 +109,21 @@
       return outputStr
     }
 
+    function printCharacters(){
+      let shapeIds = Object.keys(shapes)
+      let outputStr = "var group = new THREE.Group()\n\n"
+      let shapeId
+      for(var i=0; i<shapeIds.length; i++){
+        shapeId = shapeIds[i]
+        // console.log( 'geo', shapes[shapeId].mesh.geometry )
+        outputStr += shapes[shapeId].printCharacter()
+      }
+
+      outputStr += "scene.add(group)\n"
+
+      return outputStr
+    }
+
     function copyCurrentShape(){
       let duplicate = shapes[currentShapeId].duplicate()
       shapes[duplicate.id] = duplicate
@@ -225,11 +240,13 @@
         // utilty functions
         if(event.key == "p"){
           // console.log( shapes[currentShapeId].print() )
-
           console.log( 'output ', printShapes() )
           document.getElementById("output").value = printShapes()
         } else if(event.key == "o"){
           copyCurrentShape()
+        } else if(event.key == "i"){
+          console.log( 'output ', printCharacters() )
+          document.getElementById("output").value = printCharacters()
         }
 
       }
