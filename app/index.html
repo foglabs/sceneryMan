@@ -111,15 +111,13 @@
 
     function printCharacters(){
       let shapeIds = Object.keys(shapes)
-      let outputStr = "var group = new THREE.Group()\n\n"
+      let outputStr = ""
       let shapeId
       for(var i=0; i<shapeIds.length; i++){
         shapeId = shapeIds[i]
         // console.log( 'geo', shapes[shapeId].mesh.geometry )
         outputStr += shapes[shapeId].printCharacter()
       }
-
-      outputStr += "scene.add(group)\n"
 
       return outputStr
     }

@@ -15,11 +15,18 @@ class Sphere extends Shape {
     scene.remove(this.mesh)
   }
 
+
   print(){
     let str = "var shape" + this.id + " = new THREE.Mesh( new THREE.SphereGeometry( " + this.radius + ", 32, 32 ), new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }))\nshape" + this.id + ".position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\nshape" + this.id + ".rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\ngroup.add ( shape" + this.id + " )\n\n"
 
     return str
   }
+
+  printCharacter(){
+    let str = "var char" + this.id + " = new Character( new THREE.SphereGeometry( " + this.radius + ", 32, 32 ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [255,255,255], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\nchar" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\nscene.add( char" + this.id + ".mesh )\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
+    return str
+  }
+
 
 }
 

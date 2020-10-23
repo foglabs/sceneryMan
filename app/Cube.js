@@ -35,7 +35,7 @@ class Cube extends Shape {
   }
 
   printCharacter(){
-    let str = "var char" + this.id + " = new Character( new THREE.Mesh( new THREE.BoxGeometry( " + this.dimX*this.mesh.scale.x + "," + this.dimY*this.mesh.scale.y + "," + this.dimZ*this.mesh.scale.z +  " ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [255,255,255], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\char" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
+    let str = "var char" + this.id + " = new Character( new THREE.BoxGeometry( " + this.dimX*this.mesh.scale.x + "," + this.dimY*this.mesh.scale.y + "," + this.dimZ*this.mesh.scale.z +  " ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [255,255,255], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\nchar" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\nscene.add( char" + this.id + ".mesh )\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
     return str
   }
 
