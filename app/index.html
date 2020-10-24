@@ -5,18 +5,6 @@
    <link rel="stylesheet" href="SceneryMan.css">
 </head>
 <body>
-  <script type="text/javascript">
-    function rgbToHex(r,g,b){
-      return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b)
-    }
-
-    function componentToHex(c) {
-      c = c < 255 ? c : 255 
-      var hex = c.toString(16)
-      return hex.length == 1 ? "0" + hex : hex
-    }
-
-  </script>
 
   <script type="module">
     import * as THREE from './three.module.js'
@@ -24,6 +12,10 @@
     import { Shape } from './Shape.js'
     import { Cube } from './Cube.js'
     import { Sphere } from './Sphere.js'
+    import { Util } from './Util.js'
+
+
+    console.log( 'test', new Util().rgbToHex(10,20,30) )
 
     var shapes = {}
     var currentShapeId = null

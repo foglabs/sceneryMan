@@ -1,10 +1,10 @@
 import * as THREE from "./three.module.js"
-// import { Timer } from "./timer.js"
+import { Util } from './Util.js'
 
 class Shape {
   constructor(geo){
     this.id = Math.random().toString(36).slice(2)
-    this.color = rgbToHex(Math.floor( Math.random() * 255 ), Math.floor( Math.random() * 255 ), Math.floor( Math.random() * 255 ))
+    this.color = new Util().rgbToHex(Math.floor( Math.random() * 255 ), Math.floor( Math.random() * 255 ), Math.floor( Math.random() * 255 ))
     this.mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial( { needsUpdate: true, color: this.color, transparent: true }))
 
     if(!this.name){
