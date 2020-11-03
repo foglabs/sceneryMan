@@ -140,17 +140,22 @@
       let shapeIds = Object.keys(shapes)
       let shapeId
 
-      let selected
+      let selected, selectedShape
       for(var i=0; i<shapeIds.length; i++){
         shapeId = shapeIds[i]
 
         if(shapeId == currentShapeId){
           selected = "*"
+          selectedShape = shapes[shapeId]
         } else {
           selected = ""
         }
 
         str += "<h2 style='color: " + shapes[shapeId].color + ";'>" + selected + shapes[shapeId].name + "</h2>"
+      }
+
+      if(selectedShape){
+        str += "<h2>" + selectedShape.mesh.position.x + "," + selectedShape.mesh.position.y + "," + selectedShape.mesh.position.z + "</h2>"
       }
 
       // console.log( 'shape list', str )
@@ -195,7 +200,20 @@
         if(event.key == "ArrowLeft" || event.key == "ArrowUp" || event.key == "ArrowRight" || event.key == "ArrowDown"){
 
           let shift = keyStates["Shift"]  
-          shapes[currentShapeId].move(event.key, shift)
+          let ctrl = keyStates["1"]
+
+          if(ctrl){
+            // move alllll shapes
+            let shape, shapeKeys
+            shapeKeys = Object.keys(shapes)
+            for(var i=0; i<shapeKeys.length; i++){
+              shape = shapes[shapeKeys[i]]
+              shape.move(event.key, shift)
+            }
+          } else {
+
+            shapes[currentShapeId].move(event.key, shift)
+          }
         }
 
         if(event.key == "q"){
@@ -233,10 +251,10 @@
           console.log( 'output ', printShapes() )
           document.getElementById("output").value = printShapes()
         } else if(event.key == "o"){
-          copyCurrentShape()
-        } else if(event.key == "i"){
           console.log( 'output ', printCharacters() )
           document.getElementById("output").value = printCharacters()
+        } else if(event.key == "u"){
+          copyCurrentShape()
         }
 
       }
