@@ -37,7 +37,6 @@ class Session {
     this.currentShapeId = duplicate.id
   }
 
-
   getOrigin(){
     let origin
     origin = document.getElementById("origin").value
