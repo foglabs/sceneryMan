@@ -23,7 +23,7 @@ class Sphere extends Shape {
   }
 
   printCharacter(){
-    let str = "var char" + this.id + " = new Character( new THREE.SphereGeometry( " + this.radius + ", 32, 32 ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [255,255,255], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\nchar" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\nscene.add( char" + this.id + ".mesh )\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
+    let str = "var char" + this.id + " = new Character( new THREE.SphereGeometry( " + this.radius + ", 32, 32 ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [255,255,255], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + (this.mesh.position.x + origin[0]) + "," + (this.mesh.position.y + origin[1]) + "," + (this.mesh.position.z + origin[2]) + ")\nchar" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\nscene.add( char" + this.id + ".mesh )\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
     return str
   }
 

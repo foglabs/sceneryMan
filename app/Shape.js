@@ -18,25 +18,25 @@ class Shape {
     this.mesh.material.color.set(this.color)
   }
 
-  move(keyName, shift=false){
+  move(keyName, amt, shift=false){
 
     if(keyName == 'ArrowLeft'){
-      this.mesh.position.set( this.mesh.position.x + 0.01, this.mesh.position.y, this.mesh.position.z )
+      this.mesh.position.set( this.mesh.position.x + amt, this.mesh.position.y, this.mesh.position.z )
     } else if(keyName == 'ArrowRight'){
-      this.mesh.position.set( this.mesh.position.x - 0.01, this.mesh.position.y, this.mesh.position.z )
+      this.mesh.position.set( this.mesh.position.x - amt, this.mesh.position.y, this.mesh.position.z )
 
     } else if(keyName == 'ArrowUp'){
       if(shift){
-        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y + 0.01, this.mesh.position.z )  
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y + amt, this.mesh.position.z )  
       } else {
-        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y, this.mesh.position.z + 0.01 )
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y, this.mesh.position.z + amt )
       }
 
     } else if(keyName == 'ArrowDown'){
       if(shift){
-        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y - 0.01, this.mesh.position.z )  
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y - amt, this.mesh.position.z )  
       } else {
-        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y, this.mesh.position.z - 0.01 )
+        this.mesh.position.set( this.mesh.position.x, this.mesh.position.y, this.mesh.position.z - amt )
       }
     }
   }

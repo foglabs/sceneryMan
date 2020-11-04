@@ -35,9 +35,16 @@ class Cube extends Shape {
     return str
   }
 
-  printCharacter(){
+  printCharacter(origin){
     let color = new Util().hexToRgb(this.color)
-    let str = "var char" + this.id + " = new Character( new THREE.BoxGeometry( " + this.dimX*this.mesh.scale.x + "," + this.dimY*this.mesh.scale.y + "," + this.dimZ*this.mesh.scale.z +  " ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [" + color[0] + "," + color[1] + "," + color[2] + "], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + this.mesh.position.x + "," + this.mesh.position.y + "," + this.mesh.position.z + ")\nchar" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\nscene.add( char" + this.id + ".mesh )\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
+
+    let posx,posy,posz
+    console.log( 'oirin', origin )
+    posx = this.mesh.position.x + origin[0]
+    posy = this.mesh.position.y + origin[1]
+    posz = this.mesh.position.z + origin[2]
+
+    let str = "var char" + this.id + " = new Character( new THREE.BoxGeometry( " + this.dimX*this.mesh.scale.x + "," + this.dimY*this.mesh.scale.y + "," + this.dimZ*this.mesh.scale.z +  " ), new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()), [" + color[0] + "," + color[1] + "," + color[2] + "], new THREE.MeshStandardMaterial( { color: '" + this.color + "', transparent: true }) )\nchar" + this.id + ".mesh.position.set(" + (posx) + "," + (posy) + "," + (posz) + ")\nchar" + this.id + ".mesh.rotation.set(" + this.mesh.rotation.x + "," + this.mesh.rotation.y + ","+ this.mesh.rotation.z + ")\nscene.add( char" + this.id + ".mesh )\ncharacters[char" + this.id + ".mesh.id] = char" + this.id + "\n\n"
     return str
   }
 

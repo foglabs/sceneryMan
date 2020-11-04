@@ -18,4 +18,9 @@ app.get('/', function(req, res, next){
   res.sendFile(path.join(__dirname, 'app', 'index.html'))
 })
 
-app.listen(4000)
+app.get('/:filename', function(req, res, next){
+  res.header('Content-Type', 'text/js')
+  res.sendFile(path.join(__dirname, 'app', req.params.filename.replace(/^.*[\\\/]/, '')))
+})
+
+app.listen(5000)
